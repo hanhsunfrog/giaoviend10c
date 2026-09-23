@@ -1,0 +1,65 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teachers · Điểm 10+</title><meta name="description" content="Cổng thông tin giáo viên Điểm 10+: lịch dạy, sổ tay, playbook, học liệu, SOP và thông báo.">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="appbar">
+  <img class="logo" src="assets/logo.png"><div class="brand">TEACHERS · D10 HUB</div>
+  <nav class="nav">
+    <button data-panel="home">Tổng quan</button><button data-panel="schedule">Lịch dạy</button>
+    <button data-panel="library">Sổ tay & tài liệu</button><button data-panel="announcements">Thông báo</button>
+  </nav>
+  <div class="search"><input id="q" placeholder="Tìm sổ tay, playbook, SOP, nội dung..."></div>
+</header>
+
+<div class="wrap">
+  <section id="results"></section>
+
+  <section id="panel-home" class="panel">
+    <div class="hero">
+      <div><h1>Cổng Giáo viên Điểm 10+</h1><p>Một nơi để giáo viên xem lịch, tra cứu sổ tay, mở Playbook, dùng SOP, biểu mẫu và tài liệu giảng dạy.</p>
+      <div class="hint"><span class="chip">Sổ tay Core</span><span class="chip">Playbook</span><span class="chip">SOP</span><span class="chip">Toolkit</span><span class="chip">Lịch dạy</span></div></div>
+      <div class="hero-card"><h3>Phiên bản xuất bản đầu tiên</h3><p>Hiện đã tích hợp toàn bộ hệ tài liệu giáo viên đã QA. Phần lịch dạy và thông báo đang để schema rỗng, sẵn sàng nối dữ liệu thật từ D10 Academic Core/Google Workspace khi anh triển khai.</p></div>
+    </div>
+    <div class="grid-title"><h2>Truy cập nhanh</h2><p>Dùng theo đúng nhu cầu</p></div>
+    <div class="quick-grid">
+      <div class="quick" onclick="setPanel('schedule')"><div class="icon">🗓️</div><h3>Lịch dạy của tôi</h3><p>Xem ca dạy, cơ sở, lớp và thời gian.</p><span class="status">Chưa kết nối dữ liệu</span></div>
+      <div class="quick" onclick="openBook('core',1)"><div class="icon">📘</div><h3>Sổ tay Core</h3><p>Chuẩn chung mà mọi giáo viên cần nắm.</p></div>
+      <div class="quick" onclick="openBook('playbook-a',1)"><div class="icon">🧭</div><h3>Playbook theo học sinh</h3><p>Gặp đối tượng nào, mở đúng playbook đó.</p></div>
+      <div class="quick" onclick="openBook('playbook-b',1)"><div class="icon">🏫</div><h3>Playbook theo mô hình lớp</h3><p>Tổ chức lớp độc lập, nhóm, ghép, kèm...</p></div>
+      <div class="quick" onclick="openBook('toolkit',1)"><div class="icon">🧰</div><h3>Toolkit</h3><p>Phiếu, checklist, biểu mẫu dùng trực tiếp.</p></div>
+      <div class="quick" onclick="setPanel('library')"><div class="icon">📚</div><h3>Thư viện giáo viên</h3><p>Mở toàn bộ sổ tay, SOP và cẩm nang.</p></div>
+    </div>
+    <div class="grid-title"><h2>Tài liệu nổi bật</h2><p>Đã QA và sẵn sàng sử dụng</p></div>
+    <div id="library" class="library"></div>
+  </section>
+
+  <section id="panel-schedule" class="panel">
+    <div class="grid-title"><h2>Lịch dạy</h2><p>Kết nối dữ liệu thật sau</p></div>
+    <div class="empty"><strong>Chưa có dữ liệu lịch dạy.</strong>Site đã tạo sẵn <code>data/schedule.json</code> để nối lịch từ D10 Academic Core, Google Calendar hoặc nguồn anh chọn. Không có lịch mẫu giả.</div>
+  </section>
+
+  <section id="panel-library" class="panel">
+    <div class="grid-title"><h2>Sổ tay & tài liệu giáo viên</h2><p>Core · Playbook · SOP · Toolkit · Phát triển GV</p></div>
+    <div id="library2" class="library"></div>
+  </section>
+
+  <section id="panel-announcements" class="panel">
+    <div class="grid-title"><h2>Thông báo</h2><p>Nguồn dữ liệu vận hành</p></div>
+    <div class="empty"><strong>Chưa có thông báo được kết nối.</strong>Đã tạo sẵn <code>data/announcements.json</code>; khi có nguồn chính thức, hệ thống sẽ hiển thị tại đây.</div>
+  </section>
+</div>
+
+<section id="reader" class="reader">
+  <aside class="sidebar"><div id="thumbs"></div></aside>
+  <div class="stage"><div id="readerTitle" class="reader-title"></div>
+    <button class="navarrow prev" onclick="prev()">‹</button><div class="frame"><img id="pageImg" class="page"></div><button class="navarrow next" onclick="next()">›</button>
+    <div class="toolbar"><button class="tool" onclick="closeBook()">Đóng</button><button class="tool" onclick="go(1)">Đầu</button><button class="tool" onclick="prev()">‹</button><span id="count" class="count"></span><button class="tool" onclick="next()">›</button><button class="tool" onclick="go(book.pages)">Cuối</button><button class="tool" onclick="document.documentElement.requestFullscreen?.()">⛶</button></div>
+  </div>
+</section>
+<script src="assets/app.js"></script>
+<script>
+fetch('data/books.json').then(r=>r.json()).then(bs=>{
+ const target=document.getElementById('library2');
+ bs.forEach(b=>{let c=document.createElement('div');c.className='book-card';c.innerHTML=`<div class="cover"><img src="${b.cover}"></div><div class="book-body"><div class="kind">${b.kind}</div><h3>${b.title}</h3><p>${b.subtitle}</p><div class="meta"><span class="pill">${b.pages} trang</span><span>Mở sách →</span></div></div>`;c.onclick=()=>openBook(b.id,1);target.appendChild(c)})
+})
+</script>
+</body></html>

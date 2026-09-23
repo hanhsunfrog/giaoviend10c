@@ -1,0 +1,58 @@
+[
+  {
+    "id": "core",
+    "title": "Sổ tay Core V2.1",
+    "subtitle": "Chuẩn nghề nghiệp và chuẩn một buổi dạy",
+    "kind": "SỔ TAY",
+    "pages": 38,
+    "cover": "books/core/001.jpg"
+  },
+  {
+    "id": "playbook-a",
+    "title": "Playbook A – Theo đối tượng học sinh",
+    "subtitle": "8 nhóm học sinh, dùng theo tình huống thực tế",
+    "kind": "PLAYBOOK",
+    "pages": 16,
+    "cover": "books/playbook-a/001.jpg"
+  },
+  {
+    "id": "playbook-b",
+    "title": "Playbook B – Theo mô hình lớp",
+    "subtitle": "Lớp độc lập, nhiều nhóm, lớp ghép, lớp kèm, chiêu sinh",
+    "kind": "PLAYBOOK",
+    "pages": 11,
+    "cover": "books/playbook-b/001.jpg"
+  },
+  {
+    "id": "quick",
+    "title": "Tra cứu nhanh",
+    "subtitle": "Tìm nhanh chuẩn, tình huống và đầu mối",
+    "kind": "TRA CỨU",
+    "pages": 4,
+    "cover": "books/quick/001.jpg"
+  },
+  {
+    "id": "sop",
+    "title": "SOP học liệu",
+    "subtitle": "Quy trình sử dụng, phản hồi và cập nhật học liệu",
+    "kind": "SOP",
+    "pages": 7,
+    "cover": "books/sop/001.jpg"
+  },
+  {
+    "id": "toolkit",
+    "title": "Toolkit giáo viên",
+    "subtitle": "Phụ lục, biểu mẫu, checklist và công cụ",
+    "kind": "TOOLKIT",
+    "pages": 10,
+    "cover": "books/toolkit/001.jpg"
+  },
+  {
+    "id": "dev",
+    "title": "Cẩm nang phát triển giáo viên",
+    "subtitle": "Đánh giá, dự giờ, phản hồi và phát triển",
+    "kind": "PHÁT TRIỂN",
+    "pages": 6,
+    "cover": "books/dev/001.jpg"
+  }
+]
